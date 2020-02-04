@@ -9,5 +9,4 @@ public class CvgtApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CvgtApplication.class, args);
 	}
-
 }

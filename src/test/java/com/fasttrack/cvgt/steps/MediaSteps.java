@@ -6,10 +6,10 @@ import com.fasttrack.cvgt.transfer.SaveMediaRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.arrayWithSize;
 import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.CoreMatchers.is;
 
 @Component
 public class MediaSteps {
@@ -21,7 +21,7 @@ public class MediaSteps {
         SaveMediaRequest request = new SaveMediaRequest();
         request.setName("Pic" + System.currentTimeMillis());
         request.setDescription("Nature Trees");
-        request.setImageUrl("url");
+        request.setImageUrl("https://c8.alamy.com/comp/J4AR9Y/victory-park-riga-latvia-capital-2017-nature-buildings-trees-and-beautiful-J4AR9Y.jpg");
 
         Media createdMedia = mediaService.createMedia(request);
 
@@ -29,6 +29,7 @@ public class MediaSteps {
         assertThat(createdMedia.getId(), greaterThan(0L));
         assertThat(createdMedia.getName(), is(request.getName()));
         assertThat(createdMedia.getDescription(), is(request.getDescription()));
+        assertThat(createdMedia.getImageUrl(), containsString("http"));
 
         return createdMedia;
     }

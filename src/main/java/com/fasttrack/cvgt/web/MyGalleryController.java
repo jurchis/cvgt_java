@@ -12,7 +12,7 @@ import javax.validation.Valid;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/my-galleries")
+@RequestMapping(value="/my-galleries", method = {RequestMethod.GET, RequestMethod.PUT})
 public class MyGalleryController {
     private final MyGalleryService myGalleryService;
 

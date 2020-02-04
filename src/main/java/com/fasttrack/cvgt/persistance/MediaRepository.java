@@ -11,7 +11,7 @@ public interface MediaRepository extends JpaRepository<Media, Long> {
 
     Page<Media> findByNameContaining(String partialName, Pageable pageable);
 
-    @Query(value = "SELECT * FROM media WHERE `name` LIKE '%?0%'", nativeQuery = true)
+    @Query(value = "SELECT * FROM media", nativeQuery = true)
     Page<Media> findByPartialName(String partialName, Pageable pageable);
 
 }

@@ -2,8 +2,12 @@ package com.fasttrack.cvgt.web;
 
 import com.fasttrack.cvgt.domain.Media;
 import com.fasttrack.cvgt.service.MediaService;
+import com.fasttrack.cvgt.transfer.GetMediasRequest;
+import com.fasttrack.cvgt.transfer.MediaResponse;
 import com.fasttrack.cvgt.transfer.SaveMediaRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +36,13 @@ public class MediaController {
     public ResponseEntity<Media> getMedia(@PathVariable("id") Long id) {
         Media media = mediaService.getMedia(id);
         return new ResponseEntity<>(media, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<MediaResponse>> getProducts(
+            GetMediasRequest request, Pageable pageable) {
+        Page<MediaResponse> products = mediaService.getMedias   (request, pageable);
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
