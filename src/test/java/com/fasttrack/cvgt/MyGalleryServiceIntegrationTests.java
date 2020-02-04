@@ -1,13 +1,13 @@
 package com.fasttrack.cvgt;
 
-import com.fasttrack.cvgt.domain.User;
 import com.fasttrack.cvgt.domain.Media;
+import com.fasttrack.cvgt.domain.User;
 import com.fasttrack.cvgt.service.MyGalleryService;
-import com.fasttrack.cvgt.steps.UserSteps;
 import com.fasttrack.cvgt.steps.MediaSteps;
+import com.fasttrack.cvgt.steps.UserSteps;
 import com.fasttrack.cvgt.transfer.AddMediaToMyGalleryRequest;
-import com.fasttrack.cvgt.transfer.MyGalleryResponse;
 import com.fasttrack.cvgt.transfer.MediaInMyGalleryResponse;
+import com.fasttrack.cvgt.transfer.MyGalleryResponse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,6 @@ import java.util.Iterator;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.CoreMatchers.is;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

@@ -28,28 +28,22 @@ public class MediaServiceIntegrationTests {
 
     @Test
     public void testCreateMedia_whenValidRequest_thenMediaIsSaved() {
-        //To do not repeat ourselves we CTRL+ALT+M / refactor->extract ->method
         mediaSteps.createMedia();
     }
 
     @Test(expected = TransactionSystemException.class)
     public void testCreateMedia_whenInvalidRequest_thenThrowException() {
         SaveMediaRequest request = new SaveMediaRequest();
-        // leaving request properties with default null values
-        //to validate the negative flow
 
         mediaService.createMedia(request);
     }
 
     @Test
-    //is recommended for a test to be independent from another
-    //independent tests can be run in parallel
     public void testGetMedia_whenExistingMedia_thenReturnMedia() {
         Media createdMedia = mediaSteps.createMedia();
 
         Media retrievedMedia = mediaService.getMedia(createdMedia.getId());
 
-        //actual  vs expected
         assertThat(retrievedMedia, notNullValue());
         assertThat(retrievedMedia.getId(), is(createdMedia.getId()));
         assertThat(retrievedMedia.getName(), is(createdMedia.getName()));

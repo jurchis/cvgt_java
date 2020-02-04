@@ -1,12 +1,12 @@
 package com.fasttrack.cvgt;
 
+import com.fasttrack.cvgt.domain.Media;
 import com.fasttrack.cvgt.domain.MyGallery;
 import com.fasttrack.cvgt.domain.User;
-import com.fasttrack.cvgt.domain.Media;
 import com.fasttrack.cvgt.persistance.MyGalleryRepository;
+import com.fasttrack.cvgt.service.MediaService;
 import com.fasttrack.cvgt.service.MyGalleryService;
 import com.fasttrack.cvgt.service.UserService;
-import com.fasttrack.cvgt.service.MediaService;
 import com.fasttrack.cvgt.transfer.AddMediaToMyGalleryRequest;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +20,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.hamcrest.CoreMatchers.is;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MyGalleryServiceUnitTest {
