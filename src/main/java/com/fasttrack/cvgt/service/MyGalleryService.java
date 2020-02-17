@@ -60,6 +60,7 @@ public class MyGalleryService {
     }
 
     @Transactional
+//    Python Integration
     public PyCvRequest runComputerVision(@Valid PyCvRequest request) throws Exception {
 
         String imageURL=request.getImageUrl();
