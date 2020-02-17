@@ -1,13 +1,9 @@
 package com.fasttrack.cvgt.transfer;
 
-import javax.validation.constraints.NotNull;
-
 public class SaveMediaRequest {
 
     private String description;
-    @NotNull
     private String name;
-    @NotNull
     private String imageUrl;
 
     public String getDescription() {

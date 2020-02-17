@@ -20,7 +20,6 @@ public class MyGallery {
 
     public void addToMyGallery(Media media) {
         medias.add(media);
-
         media.getMyGalleries().add(this);
     }
 
@@ -51,6 +50,15 @@ public class MyGallery {
 
     public void setMedias(Set<Media> medias) {
         this.medias = medias;
+    }
+
+    @Override
+    public String toString() {
+        return "MyGallery{" +
+                "id=" + id +
+                ", user=" + user +
+                ", medias=" + medias +
+                '}';
     }
 
     @Override

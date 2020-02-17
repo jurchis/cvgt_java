@@ -5,7 +5,11 @@ import java.util.Set;
 public class MyGalleryResponse {
 
     private Long id;
+    private String name;
+    private String imageUrl;
+    private String description;
     private Set<MediaInMyGalleryResponse> medias;
+
 
     public Long getId() {
         return id;
@@ -23,11 +27,27 @@ public class MyGalleryResponse {
         this.medias = medias;
     }
 
-    @Override
-    public String toString() {
-        return "MyGalleryResponse{" +
-                "id=" + id +
-                ", medias=" + medias +
-                '}';
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

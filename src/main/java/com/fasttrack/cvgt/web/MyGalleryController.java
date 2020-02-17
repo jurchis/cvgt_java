@@ -2,6 +2,7 @@ package com.fasttrack.cvgt.web;
 
 import com.fasttrack.cvgt.service.MyGalleryService;
 import com.fasttrack.cvgt.transfer.AddMediaToMyGalleryRequest;
+import com.fasttrack.cvgt.transfer.DeleteMediaFromMyGalleryRequest;
 import com.fasttrack.cvgt.transfer.MyGalleryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,7 @@ import javax.validation.Valid;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value="/my-galleries", method = {RequestMethod.GET, RequestMethod.PUT})
+@RequestMapping(value="/my-gallery", method = {RequestMethod.GET, RequestMethod.PUT})
 public class MyGalleryController {
     private final MyGalleryService myGalleryService;
 
@@ -24,6 +25,12 @@ public class MyGalleryController {
     @PutMapping
     public ResponseEntity addMediaToMyGallery(@RequestBody @Valid AddMediaToMyGalleryRequest request) {
         myGalleryService.addMediaToMyGallery(request);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping()
+    public ResponseEntity deleteMediaFromMyGallery(@RequestBody @Valid DeleteMediaFromMyGalleryRequest request) {
+        myGalleryService.deleteMediaFromMyGallery(request);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 

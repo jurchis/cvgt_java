@@ -6,6 +6,7 @@ import com.fasttrack.cvgt.domain.User;
 import com.fasttrack.cvgt.exception.ResourceNotFoundException;
 import com.fasttrack.cvgt.persistance.MyGalleryRepository;
 import com.fasttrack.cvgt.transfer.AddMediaToMyGalleryRequest;
+import com.fasttrack.cvgt.transfer.DeleteMediaFromMyGalleryRequest;
 import com.fasttrack.cvgt.transfer.MediaInMyGalleryResponse;
 import com.fasttrack.cvgt.transfer.MyGalleryResponse;
 import org.slf4j.Logger;
@@ -60,6 +61,20 @@ public class MyGalleryService {
     }
 
     @Transactional
+    public void deleteMediaFromMyGallery(DeleteMediaFromMyGalleryRequest request) {
+        LOGGER.info("Deleting media from myGallery: {}", request);
+
+        MyGallery myGallery = myGalleryRepository.findById(request.getUserId())
+                .orElse(new MyGallery());
+
+        Media media = mediaService.getMedia(request.getMediaId());
+
+        myGallery.removeFromMyGallery(media);
+
+        myGalleryRepository.save(myGallery);
+    }
+
+    @Transactional
     public MyGalleryResponse getMyGallery(long id) {
         LOGGER.info("Retrieving myGallery {}", id);
 
@@ -80,6 +95,8 @@ public class MyGalleryService {
             MediaInMyGalleryResponse mediaResponse = new MediaInMyGalleryResponse();
             mediaResponse.setId(media.getId());
             mediaResponse.setName(media.getName());
+            mediaResponse.setImageUrl(media.getImageUrl());
+            mediaResponse.setDescription(media.getDescription());
 
             mediasInMyGallery.add(mediaResponse);
         }
