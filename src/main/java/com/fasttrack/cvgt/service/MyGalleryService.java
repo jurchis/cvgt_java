@@ -5,16 +5,15 @@ import com.fasttrack.cvgt.domain.MyGallery;
 import com.fasttrack.cvgt.domain.User;
 import com.fasttrack.cvgt.exception.ResourceNotFoundException;
 import com.fasttrack.cvgt.persistance.MyGalleryRepository;
-import com.fasttrack.cvgt.transfer.AddMediaToMyGalleryRequest;
-import com.fasttrack.cvgt.transfer.DeleteMediaFromMyGalleryRequest;
-import com.fasttrack.cvgt.transfer.MediaInMyGalleryResponse;
-import com.fasttrack.cvgt.transfer.MyGalleryResponse;
+import com.fasttrack.cvgt.transfer.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
+import java.io.FileWriter;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -58,6 +57,26 @@ public class MyGalleryService {
         myGallery.addToMyGallery(media);
 
         myGalleryRepository.save(myGallery);
+    }
+
+    @Transactional
+    public PyCvRequest runComputerVision(@Valid PyCvRequest request) throws Exception {
+
+        String imageURL=request.getImageUrl();
+
+        String fileName = "C:\\Users\\Florin Jurchis\\Desktop\\Training\\JAVA\\cvgt-py-side\\runPy.bat";
+        FileWriter writer = new FileWriter(fileName);
+        writer.write("set VAR_1="+imageURL+"\n");
+        writer.write("c:\n");
+        writer.write("call \"C:\\Users\\Florin Jurchis\\Anaconda3\\Scripts\\\"activate base\n");
+        writer.write("python \"C:\\Users\\Florin Jurchis\\Desktop\\Training\\JAVA\\cvgt-py-side\\opencv-semantic-segmentation\\segment.py\" %VAR_1%\n");
+        writer.write("conda deactivate\n");
+        writer.write("exit /b 0");
+        writer.close();
+
+        String[] commands = {"cmd", "/c", "start", "\"cvgt-web-app\"",fileName};
+        Runtime.getRuntime().exec(commands);
+        return null;
     }
 
     @Transactional

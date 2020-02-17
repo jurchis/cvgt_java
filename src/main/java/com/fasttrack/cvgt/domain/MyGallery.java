@@ -29,20 +29,6 @@ public class MyGallery {
         media.getMyGalleries().remove(this);
     }
 
-    public void runComputerVision(String imageURL) throws Exception {
-        String fileName = "C:\\Users\\Florin Jurchis\\Desktop\\Training\\JAVA\\cvgt-py-side\\runPy.bat";
-        FileWriter writer = new FileWriter(fileName);
-        writer.write("set VAR_1=imageURL\n");
-        writer.write("c:\n");
-        writer.write("call \"C:\\Users\\Florin Jurchis\\Anaconda3\\Scripts\\\"activate base\n");
-        writer.write("python \"C:\\Users\\Florin Jurchis\\Desktop\\Training\\JAVA\\cvgt-py-side\\opencv-semantic-segmentation\\segment.py\" %VAR_1%\n");
-        writer.write("conda deactivate");
-        writer.close();
-
-        String[] commands = {"cmd", "/c", "start", "\"cvgt-web-app\"",fileName};
-        Runtime.getRuntime().exec(commands);
-    }
-
     public Long getId() {
         return id;
     }

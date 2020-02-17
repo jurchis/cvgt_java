@@ -5,6 +5,7 @@ import com.fasttrack.cvgt.service.MyGalleryService;
 import com.fasttrack.cvgt.transfer.AddMediaToMyGalleryRequest;
 import com.fasttrack.cvgt.transfer.DeleteMediaFromMyGalleryRequest;
 import com.fasttrack.cvgt.transfer.MyGalleryResponse;
+import com.fasttrack.cvgt.transfer.PyCvRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,10 +43,9 @@ public class MyGalleryController {
     }
 
     @PostMapping
-    public void createMedia(String imageURL) {
-        MyGallery galleryItem = new MyGallery();
+    public void createMedia(@RequestBody @Valid PyCvRequest request) {
         try {
-            galleryItem.runComputerVision(imageURL);
+            PyCvRequest runCv = myGalleryService.runComputerVision(request);
         } catch (Exception e) {
             e.printStackTrace();
         }
