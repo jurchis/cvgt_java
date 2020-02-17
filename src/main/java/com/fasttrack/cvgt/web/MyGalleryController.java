@@ -1,5 +1,6 @@
 package com.fasttrack.cvgt.web;
 
+import com.fasttrack.cvgt.domain.MyGallery;
 import com.fasttrack.cvgt.service.MyGalleryService;
 import com.fasttrack.cvgt.transfer.AddMediaToMyGalleryRequest;
 import com.fasttrack.cvgt.transfer.DeleteMediaFromMyGalleryRequest;
@@ -13,7 +14,7 @@ import javax.validation.Valid;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value="/my-gallery", method = {RequestMethod.GET, RequestMethod.PUT})
+@RequestMapping(value="/my-gallery")
 public class MyGalleryController {
     private final MyGalleryService myGalleryService;
 
@@ -22,7 +23,7 @@ public class MyGalleryController {
         this.myGalleryService = myGalleryService;
     }
 
-    @PutMapping
+    @PutMapping()
     public ResponseEntity addMediaToMyGallery(@RequestBody @Valid AddMediaToMyGalleryRequest request) {
         myGalleryService.addMediaToMyGallery(request);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -38,5 +39,15 @@ public class MyGalleryController {
     public ResponseEntity<MyGalleryResponse> getMyGallery(@PathVariable("id") long id) {
         MyGalleryResponse myGallery = myGalleryService.getMyGallery(id);
         return new ResponseEntity<>(myGallery, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public void createMedia(String imageURL) {
+        MyGallery galleryItem = new MyGallery();
+        try {
+            galleryItem.runComputerVision(imageURL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

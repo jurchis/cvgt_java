@@ -1,6 +1,7 @@
 package com.fasttrack.cvgt.domain;
 
 import javax.persistence.*;
+import java.io.FileWriter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,6 +27,20 @@ public class MyGallery {
     public void removeFromMyGallery(Media media) {
         medias.remove(media);
         media.getMyGalleries().remove(this);
+    }
+
+    public void runComputerVision(String imageURL) throws Exception {
+        String fileName = "C:\\Users\\Florin Jurchis\\Desktop\\Training\\JAVA\\cvgt-py-side\\runPy.bat";
+        FileWriter writer = new FileWriter(fileName);
+        writer.write("set VAR_1=imageURL\n");
+        writer.write("c:\n");
+        writer.write("call \"C:\\Users\\Florin Jurchis\\Anaconda3\\Scripts\\\"activate base\n");
+        writer.write("python \"C:\\Users\\Florin Jurchis\\Desktop\\Training\\JAVA\\cvgt-py-side\\opencv-semantic-segmentation\\segment.py\" %VAR_1%\n");
+        writer.write("conda deactivate");
+        writer.close();
+
+        String[] commands = {"cmd", "/c", "start", "\"cvgt-web-app\"",fileName};
+        Runtime.getRuntime().exec(commands);
     }
 
     public Long getId() {
